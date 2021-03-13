@@ -30,10 +30,11 @@ function getModa(...nums) {
             total.push(index);
         return total;
     }, []);
-    return mode;
+
+    return mode.length > 1 ? mode : mode[0];
 }
 
-console.log(getModa(3.3, 5, 4, 4, 1, 1, 3.3, 3));
+console.log(getModa(3.3, 5, 4, 4, 4, 1, 3.3, 3));
 
 
 function getAvarage(...nums) {
@@ -57,15 +58,43 @@ function filterEvenNumbers(...numbers) {
 console.log(filterEvenNumbers(1, 2, 3, 4, 5));
 
 function countPositiveNumbers(...numbers) {
-    /* let count = 0;
-    numbers.forEach(element => {
-
-        if (element > 0) { count++ }
-    });
-    return count
- */
     return numbers.reduce((total, item) => {
         return item > 0 ? total + 1 : total
     }, 0)
 }
 console.log(countPositiveNumbers(1, -2, 3, -4, -5, 6));
+
+function getDividedByFive(...numbers) {
+    return numbers.filter(num => num % 5 == 0)
+}
+
+console.log(getDividedByFive(6, 2, 55, 11, 78, 2, 55, 77, 57, 87, 23, 2, 56, 3, 2));
+
+function replaceBadWords(string) {
+    return string.split(/fuck|shit|javascript/).join('***')
+
+}
+console.log(replaceBadWords("Are you fucking kidding? bulshit, dude its javascript"));
+
+function divideByThree(word) {
+    return word.split('').reduce((acc, val) => {
+        (acc[acc.length - 1] && acc[acc.length - 1].length < 3) ? acc[acc.length - 1] += val: acc.push(val);
+        return acc;
+    }, []);
+}
+
+console.log(divideByThree("Commander"));
+
+function generateCombinations(word) {
+    let arr = word.split('');
+    return (arr.length === 1) ? arr :
+        arr.reduce((acc, cv, index) => {
+            let remaining = [...arr];
+            remaining.splice(index, 1);
+            return acc.concat(generateCombinations(remaining).map(a => [].concat(cv, a)));
+        }, []);
+
+
+}
+
+console.log(generateCombinations('abcd'));
