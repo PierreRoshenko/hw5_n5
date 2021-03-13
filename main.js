@@ -84,17 +84,3 @@ function divideByThree(word) {
 }
 
 console.log(divideByThree("Commander"));
-
-function generateCombinations(word) {
-    let arr = word.split('');
-    return (arr.length === 1) ? arr :
-        arr.reduce((acc, cv, index) => {
-            let remaining = [...arr];
-            remaining.splice(index, 1);
-            return acc.concat(generateCombinations(remaining).map(a => [].concat(cv, a)));
-        }, []);
-
-
-}
-
-console.log(generateCombinations('abcd'));
